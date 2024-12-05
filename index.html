@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My SPA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto+Condensed:wght@700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+  <!-- Add a background container with the image -->
+  <div class="fixed inset-0 z-0">
+    <img src="pic.jpeg" class="w-full h-full object-cover opacity-30">
+  </div>
+
+  <!-- Add iframe modal container -->
+  <div id="recipe-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="relative w-[90%] h-[90%]">
+      <button onclick="closeRecipeModal()" class="absolute -top-10 right-0 text-white text-xl font-bold">&times; Close</button>
+      <iframe id="recipe-iframe" class="w-full h-full bg-white rounded-lg"></iframe>
+    </div>
+  </div>
+
+  <div id="trail-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="relative w-[90%] h-[90%]">
+      <button onclick="closeTrailModal()" class="absolute -top-10 right-0 text-white text-xl font-bold">&times; Close</button>
+      <iframe id="trail-iframe" class="w-full h-full bg-white rounded-lg"></iframe>
+    </div>
+  </div>
+
+  <div class="flex flex-col h-screen relative z-10">
+    <!-- Top Section - Recipes -->
+    <div class="flex-1 p-4 md:p-8 flex items-center">
+      <div class="w-full max-w-xl mx-auto space-y-4">
+        <div 
+          onclick="openRecipeModal()" 
+          class="cursor-pointer bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+          <div class="text-2xl text-gray-800 mb-2" style="font-family: 'Playfair Display', serif;">Finna Uppskrift</div>
+          <p class="text-gray-600">Ýttu til að uppgötva nýtt matarævintýri</p>
+        </div>
+        <p id="recipe-message" class="mt-4 text-gray-700"></p>
+      </div>
+    </div>
+    
+    <!-- Middle Section - Ofurhildur -->
+    <div class="bg-white mx-4 md:mx-8 -my-4 rounded-xl shadow-lg p-6 z-10 max-w-xl mx-auto">
+      <div class="text-3xl text-center text-gray-800" style="font-family: 'Orbitron', sans-serif;">
+        OfurHildur
+      </div>
+    </div>
+    
+    <!-- Bottom Section - Trails -->
+    <div class="flex-1 p-4 md:p-8 flex items-center">
+      <div class="w-full max-w-xl mx-auto space-y-4">
+        <div 
+          onclick="openTrailModal()" 
+          class="cursor-pointer bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+          <div class="text-2xl text-gray-800 mb-2" style="font-family: 'Roboto Condensed', sans-serif;">Finna Hlaupaleið</div>
+          <p class="text-gray-600">Ýttu til að uppgötva næsta hlaupaævintýri</p>
+        </div>
+        <p id="message" class="mt-4 text-gray-700"></p>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <!-- Add modal control scripts -->
+  <script>
+    function openRecipeModal() {
+      const modal = document.getElementById('recipe-modal');
+      const iframe = document.getElementById('recipe-iframe');
+      const randomIndex = Math.floor(Math.random() * recipes.length);
+      const randomRecipe = recipes[randomIndex];
+      iframe.src = randomRecipe;
+      modal.classList.remove('hidden');
+    }
+
+    function closeRecipeModal() {
+      const modal = document.getElementById('recipe-modal');
+      const iframe = document.getElementById('recipe-iframe');
+      iframe.src = '';
+      modal.classList.add('hidden');
+    }
+
+    function openTrailModal() {
+      const modal = document.getElementById('trail-modal');
+      const iframe = document.getElementById('trail-iframe');
+      const randomIndex = Math.floor(Math.random() * trails.length);
+      const randomTrail = trails[randomIndex];
+      iframe.src = randomTrail;
+      modal.classList.remove('hidden');
+    }
+
+    function closeTrailModal() {
+      const modal = document.getElementById('trail-modal');
+      const iframe = document.getElementById('trail-iframe');
+      iframe.src = '';
+      modal.classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
